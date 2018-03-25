@@ -1,7 +1,7 @@
 <?php
-$_config['db_connect']="mysql:host=localhost;dbname=ENTER-DB-NAME";
-$_config['db_user']="ENTER-DB-USER";
-$_config['db_pass']="ENTER-DB-PASS";
+$_config['db_connect']="mysql:host=".getenv('MYSQL_HOST').";dbname=".getenv('MYSQL_DB');
+$_config['db_user']=getenv('MYSQL_USER');
+$_config['db_pass']=getenv('MYSQL_PASS');
 $_config['max_peers']=30;
 $_config['testnet']=false;
 $_config['coin']="arionum";
