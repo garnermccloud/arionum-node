@@ -1,8 +1,8 @@
 <?php
 // Database connection
-$_config['db_connect']="mysql:host=localhost;dbname=ENTER-DB-NAME";
-$_config['db_user']="ENTER-DB-USER";
-$_config['db_pass']="ENTER-DB-PASS";
+$_config['db_connect']="mysql:host=".getenv('MYSQL_HOST').";dbname=".getenv('MYSQL_DB');
+$_config['db_user']=getenv('MYSQL_USER');
+$_config['db_pass']=getenv('MYSQL_PASSWORD');
 
 // Maximum number of connected peers 
 $_config['max_peers']=30;
