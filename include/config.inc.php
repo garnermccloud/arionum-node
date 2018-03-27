@@ -29,6 +29,6 @@ $_config['allowed_hosts']=array("127.0.0.1");
 // sanity is run every X seconds
 $_config['sanity_interval']=900;
 // accept the setting of new hostnames / should be used only if you want to change the hostname
-$_config['allow_hostname_change']=false;
+$_config['allow_hostname_change']=true;
 
 ?>
