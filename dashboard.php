@@ -55,6 +55,9 @@ $workers = $db->run("select a.worker as worker, d.name, total_hashes, avg_rate, 
 if (count($workers)>0) {
     $totals = array("hashes"=>0,"rate"=>0.0,"submit"=>0,"find"=>0,"failure"=>0,"eff"=>0.0,"drate"=>0.0,"life"=>0);
     $count = 0;
+    usort($workers, function ($item1, $item2) {
+        return $item1['avg_rate'] <=> $item2['avg_rate'];
+    });
     foreach($workers as $t) {
 	$totals['hashes'] += $t['total_hashes'];
 	$totals['rate'] += $t['avg_rate'];
