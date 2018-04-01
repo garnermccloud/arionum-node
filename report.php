@@ -41,7 +41,7 @@ if($_config['report_token'] != $token && !in_array($ip,$_config['allowed_hosts']
 $worker=san($_GET['id']);
 $type=san($_GET['type']);
 
-$workerid=$db->single("SELECT id FROM workers WHERE name=:name and type=:type and ip=:ip", array(":name"=>$worker, ":type"=>$type, ":ip"=>$ip) );
+$workerid=$db->single("SELECT id FROM workers WHERE name=:name and type=:type", array(":name"=>$worker, ":type"=>$type) );
 
 if($workerid == false) {
 	$db->run("INSERT ignore INTO workers SET name=:name, date=UNIX_TIMESTAMP(), type=:type, ip=:ip",
