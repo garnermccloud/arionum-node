@@ -70,10 +70,18 @@ if(file_exists("tmp/db-update")){
 if($_config['dbversion']<2) exit;
 
 // separate blockchain for testnet
-if($_config['testnet']==true) $_config['coin'].="-testnet"; 
+if($_config['testnet']==true) $_config['coin'].="-testnet";
+
+$isSecure = false;
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+    $isSecure = true;
+}
+elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' || !empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] == 'on') {
+    $isSecure = true;
+}
 
 // current hostname
-$hostname=(!empty($_SERVER['HTTPS'])?'https':'http')."://".san_host($_SERVER['HTTP_HOST']);
+$hostname=($isSecure ? 'https' : 'http')."://".san_host($_SERVER['HTTP_HOST']);
 // set the hostname to the current one
 if($hostname!=$_config['hostname']&&$_SERVER['HTTP_HOST']!="localhost"&&$_SERVER['HTTP_HOST']!="127.0.0.1"&&$_SERVER['hostname']!='::1'&&php_sapi_name() !== 'cli' && ($_config['allow_hostname_change']!=false||empty($_config['hostname']))){
 	$db->run("UPDATE config SET val=:hostname WHERE cfg='hostname' LIMIT 1",array(":hostname"=>$hostname));
