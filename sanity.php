@@ -54,6 +54,18 @@ echo "Sleeping for 3 seconds\n";
 // sleep for 3 seconds to make sure there's a delay between starting the sanity and other processes
 if($arg!="microsanity") sleep(3);
 
+// update the db schema, on every git pull or initial install
+if(file_exists("tmp/db-update")){
+	
+	$res=unlink("tmp/db-update");
+	if($res){
+		echo "Updating db schema! Please refresh!\n";
+		require_once("include/schema.inc.php");
+		exit;
+	}
+	echo "Could not access the tmp/db-update file. Please give full permissions to this file\n";
+}
+
 
 require_once("include/init.inc.php");
 
