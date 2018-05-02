@@ -24,7 +24,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 OR OTHER DEALINGS IN THE SOFTWARE.
 */
 set_time_limit(0);
-error_reporting(0);
+#error_reporting(0);
 
 // make sure it's not accessible in the browser
 if(php_sapi_name() !== 'cli') die("This should only be run as cli");
@@ -53,6 +53,20 @@ $arg2=trim($argv[2]);
 echo "Sleeping for 3 seconds\n";
 // sleep for 3 seconds to make sure there's a delay between starting the sanity and other processes
 if($arg!="microsanity") sleep(3);
+
+
+
+require_once("include/config.inc.php");
+require_once("include/db.inc.php");
+require_once("include/functions.inc.php");
+require_once("include/block.inc.php");
+require_once("include/account.inc.php");
+require_once("include/transaction.inc.php");
+if($_config['db_pass']=="ENTER-DB-PASS") die("Please update your config file and set your db password");
+// initial DB connection
+$db=new DB($_config['db_connect'],$_config['db_user'],$_config['db_pass'],0);
+if(!$db) die("Could not connect to the DB backend.");
+
 
 // update the db schema, on every git pull or initial install
 if(file_exists("tmp/db-update")){
