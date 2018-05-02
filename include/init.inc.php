@@ -53,19 +53,6 @@ foreach($query as $res){
 // nothing is allowed while in maintenance
 if($_config['maintenance']==1) api_err("under-maintenance");
 
-
-// update the db schema, on every git pull or initial install
-if(file_exists("tmp/db-update")){
-	
-	$res=unlink("tmp/db-update");
-	if($res){
-		echo "Updating db schema! Please refresh!\n";
-		require_once("include/schema.inc.php");
-		exit;
-	}
-	echo "Could not access the tmp/db-update file. Please give full permissions to this file\n";
-}
-
 // something went wront with the db schema
 if($_config['dbversion']<2) exit;
 
@@ -88,10 +75,6 @@ if($hostname!=$_config['hostname']&&$_SERVER['HTTP_HOST']!="localhost"&&$_SERVER
 	$_config['hostname']=$hostname;
 }
 if(empty($_config['hostname'])||$_config['hostname']=="http://"||$_config['hostname']=="https://") api_err("Invalid hostname");
-
-// run sanity
-	$t=time();
-	if($t-$_config['sanity_last']>$_config['sanity_interval']&& php_sapi_name() !== 'cli') system("php sanity.php  > /dev/null 2>&1  &");
 
 
 ?>
