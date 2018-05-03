@@ -72,6 +72,7 @@ if(!$db) die("Could not connect to the DB backend.");
 if(file_exists("tmp/db-update")){
 	
 	$res=unlink("tmp/db-update");
+	@unlink("tmp/sanity-lock");
 	if($res){
 		echo "Updating db schema! Please refresh!\n";
 		require_once("include/schema.inc.php");
