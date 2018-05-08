@@ -26,7 +26,6 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 require_once("include/report-init.inc.php");
-require("include/dbclean.php");
 
 $block=new Block;
 $current=$block->current();
