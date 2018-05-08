@@ -26,4 +26,6 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 set_time_limit(360);
 $db->run("DELETE FROM worker_report WHERE date < UNIX_TIMESTAMP()-3600;");
 $db->run("OPTIMIZE TABLE worker_report");
+$db->run("DELETE FROM worker_discovery WHERE date < UNIX_TIMESTAMP()-3600;");
+$db->run("OPTIMIZE TABLE worker_discovery");
 ?>
