@@ -39,8 +39,8 @@ if(file_exists("tmp/sanity-lock")){
 		}
 	}
 	$pid_time=filemtime("tmp/sanity-lock");
-	// if the process died, restart after 10mins
-	if(time()-$pid_time>600){
+	// if the process died, restart after 20mins
+	if(time()-$pid_time>1200){
 		@unlink("tmp/sanity-lock");
 	}
 	if(!$ignore_lock) die("Sanity lock in place");
