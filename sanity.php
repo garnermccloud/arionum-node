@@ -44,7 +44,7 @@ if(file_exists("tmp/sanity-lock")){
 	$old_pid = (time()-$pid_time>1200);
 	$no_other_sanity = ($res <= 2);
 	if($old_pid or $no_other_sanity){
-		_log("SANITY DEADLOCK - FIXING NOW");
+		echo "SANITY DEADLOCK - FIXING NOW\n";
 		@unlink("tmp/sanity-lock");
 		$ignore_lock=true;
 	}
