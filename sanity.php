@@ -32,7 +32,6 @@ if (php_sapi_name() !== 'cli') {
 }
 
 // make sure there's only a single sanity process running at the same time
-<<<<<<< HEAD
 if(file_exists("tmp/sanity-lock")){
 	$ignore_lock=false;
 	if($argv[1]=="force"){
@@ -41,10 +40,15 @@ if(file_exists("tmp/sanity-lock")){
 			$ignore_lock=true;
 		}
 	}
+	$res=intval(shell_exec("ps aux|grep /sanity.php|grep -v grep|wc -l"));
 	$pid_time=filemtime("tmp/sanity-lock");
 	// if the process died, restart after 20mins
-	if(time()-$pid_time>1200){
+	$old_pid = (time()-$pid_time>1200);
+	$no_other_sanity = ($res <= 2);
+	if($old_pid or $no_other_sanity){
+		echo "SANITY DEADLOCK - FIXING NOW\n";
 		@unlink("tmp/sanity-lock");
+		$ignore_lock=true;
 	}
 	if(!$ignore_lock) die("Sanity lock in place");
 } 

@@ -33,7 +33,7 @@ $_config['allow_hostname_change']=true;
 // rebroadcast local transactions on each sanity
 $_config['sanity_rebroadcast_locals']=true;
 // write logs to file
-$_config['enable_logging']=false;
+$_config['enable_logging']=true;
 // log file, should not be publicly viewable
 $_config['log_file']="/var/log/aro.log";
 
