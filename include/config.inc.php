@@ -36,5 +36,15 @@ $_config['sanity_rebroadcast_locals']=true;
 $_config['enable_logging']=true;
 // log file, should not be publicly viewable
 $_config['log_file']="/var/log/aro.log";
-
+// Log verbosity (default 0, maximum 3)
+$_config['log_verbosity'] = 0;
+/*
+|--------------------------------------------------------------------------
+| Masternode Configuration
+|--------------------------------------------------------------------------
+*/
+// Enable this node as a masternode
+$_config['masternode'] = false;
+// The public key for the masternode
+$_config['masternode_public_key'] = '';
 ?>
